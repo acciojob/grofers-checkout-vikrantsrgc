@@ -36,29 +36,31 @@
         <tbody>
             <tr class="item">
                 <td>Apple</td>
-                <td class="prices">5</td>
+                <td class="price" contenteditable="true">5</td>
             </tr>
             <tr class="item">
                 <td>Banana</td>
-                <td class="prices">3</td>
+                <td class="price" contenteditable="true">3</td>
             </tr>
             <tr class="item">
                 <td>Carrot</td>
-                <td class="prices">2</td>
+                <td class="price" contenteditable="true">2</td>
             </tr>
             <tr class="item">
                 <td>Tomato</td>
-                <td class="prices">4</td>
+                <td class="price" contenteditable="true">4</td>
             </tr>
         </tbody>
     </table>
 
     <button id="calculate-total" style="display: block; margin: 20px auto;">Calculate Total</button>
+    
+    <div id="ans" style="text-align: center; margin-top: 20px;"></div>
 
     <script>
         document.getElementById('calculate-total').addEventListener('click', function() {
             // Get all the prices from the table
-            const prices = document.querySelectorAll('.prices');
+            const prices = document.querySelectorAll('.price');
             let totalPrice = 0;
 
             // Loop through all the prices and calculate the total sum
@@ -66,19 +68,8 @@
                 totalPrice += parseFloat(priceElement.textContent);
             });
 
-            // Create a new row to display the total price
-            const tableBody = document.querySelector('#grocery-table tbody');
-            const totalRow = document.createElement('tr');
-            totalRow.classList.add('total-row');
-
-            // Add a cell for the "Total" text
-            const totalTextCell = document.createElement('td');
-            totalTextCell.colSpan = 2; // Make it span across both columns
-            totalTextCell.textContent = 'Total: ' + totalPrice.toFixed(2); // Show the total price rounded to 2 decimal places
-
-            // Append the total row to the table
-            totalRow.appendChild(totalTextCell);
-            tableBody.appendChild(totalRow);
+            // Display the total price in the #ans div
+            document.getElementById('ans').textContent = 'Total: ' + totalPrice.toFixed(2);
         });
     </script>
 
