@@ -1,45 +1,86 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grofers Checkout</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- the entire body must be written by student -->
-    <table style="width: 100%">
-    <caption>
-      Monthly savings
-    </caption>
-    <tr>
-      <th>Item</th>
-      <th>Prices in Rs</th>
-    </tr>
-    <tr>
-      <td class="item">Tea</td>
-      <td class="price">50</td>
-    </tr>
-    <tr>
-      <td class="item">Coffee</td>
-      <td class="price">70</td>
-    </tr>
-    <tr>
-      <td class="item">Biscuits</td>
-      <td class="price">100</td>
-    </tr>
-    <tr>
-      <td class="item">Rice</td>
-      <td class="price">130</td>
-    </tr>
-    <tr>
-      <td class="item">Milk</td>
-      <td class="price">50</td>
-    </tr>
-  </table>
-    <script type="text/javascript" src="./script.js">
-</script>
+
+    <h1 style="text-align: center;">Grocery List</h1>
+
+    <table id="grocery-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item">
+                <td>Apple</td>
+                <td class="prices">5</td>
+            </tr>
+            <tr class="item">
+                <td>Banana</td>
+                <td class="prices">3</td>
+            </tr>
+            <tr class="item">
+                <td>Carrot</td>
+                <td class="prices">2</td>
+            </tr>
+            <tr class="item">
+                <td>Tomato</td>
+                <td class="prices">4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="calculate-total" style="display: block; margin: 20px auto;">Calculate Total</button>
+
+    <script>
+        document.getElementById('calculate-total').addEventListener('click', function() {
+            // Get all the prices from the table
+            const prices = document.querySelectorAll('.prices');
+            let totalPrice = 0;
+
+            // Loop through all the prices and calculate the total sum
+            prices.forEach(priceElement => {
+                totalPrice += parseFloat(priceElement.textContent);
+            });
+
+            // Create a new row to display the total price
+            const tableBody = document.querySelector('#grocery-table tbody');
+            const totalRow = document.createElement('tr');
+            totalRow.classList.add('total-row');
+
+            // Add a cell for the "Total" text
+            const totalTextCell = document.createElement('td');
+            totalTextCell.colSpan = 2; // Make it span across both columns
+            totalTextCell.textContent = 'Total: ' + totalPrice.toFixed(2); // Show the total price rounded to 2 decimal places
+
+            // Append the total row to the table
+            totalRow.appendChild(totalTextCell);
+            tableBody.appendChild(totalRow);
+        });
+    </script>
 
 </body>
-
 </html>
